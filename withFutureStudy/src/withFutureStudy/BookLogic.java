@@ -7,14 +7,14 @@ public class BookLogic {
 	ArrayList<Book> book;
 	
 	public BookLogic() {
-		book = new ArrayList();
+		book = new ArrayList<Book>();
 	}
 
 	public void printMainMenu(){
-		System.out.println("==================¸Ş ´º==================");
-		System.out.println("1.µµ¼­ Á¶È¸ 2.µµ¼­ ÀÔ·Â 3.µµ¼­ ¼öÁ¤ 4.µµ¼­ »èÁ¦ 9.Á¾·á");
+		System.out.println("==================ë©” ë‰´==================");
+		System.out.println("1.ë„ì„œ ì „ì²´ ì¡°íšŒ 2.keyë¡œ ì¡°íšŒ 3.ë„ì„œ ì¶”ê°€ 4.ë„ì„œ ìˆ˜ì • 5.ë„ì„œ ì‚­ì œ 9.ì¢…ë£Œ");
 		System.out.println("=======================================");
-		System.out.println("¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 	}
 	
 	public int getMenuNumber(){
@@ -26,7 +26,7 @@ public class BookLogic {
 				break;
 
 			} catch (NumberFormatException e) {
-				System.out.println("ÇØ´ç ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				System.out.println("í•´ë‹¹ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 			}
 		}
 		return menuNumber;
@@ -35,79 +35,103 @@ public class BookLogic {
 	public void separateMenu(int mainMenu) {
 
 			switch (mainMenu) {
-			case 1:// µµ¼­ Á¶È¸
-				while(true){
-					System.out.println("============¸Ş ´º============");
-					System.out.println("1.°Ë»ö Á¶È¸ 2.ÀüÃ¼ Á¶È¸ 9.µÚ·Î µ¹¾Æ°¡±â");
-					System.out.println("===========================");
-					int subMenu = getMenuNumber();
-					if(subMenu == 9){break;}
-					switch(subMenu){
-					case 1: searchBook();break;
-					case 2:	searchTotal(); break;
-					default : System.out.println("¾ø´Â ¼­ºê ¸Ş´ºÀÔ´Ï´Ù."); continue;
-					}
-				}
+			case 1:// ë„ì„œ ì „ì²´ ì¡°íšŒ
+				searchTotal();
 				break;
-			case 2:// µµ¼­ ÀÔ·Â
+			case 2:// keyë¡œ ë„ì„œ ì¡°íšŒ 
+				searchBook();
+				break;
+			case 3:// ë„ì„œ ì¶”ê°€
 				insertBook();
 				break;
-			case 3:// µµ¼­ ¼öÁ¤
+				
+			case 4:// ë„ì„œ ìˆ˜ì •
 				updateBook();
 				break;
 				
-			case 4:// µµ¼­ »èÁ¦
+			case 5:// ë„ì„œ ì‚­ì œ
 				deleteBook();
 				break;
 				
-			case 9:// Á¾·á
-				System.out.println("ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.");
+			case 9:// ì¢…ë£Œ
+				System.out.println("í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.");
 				System.exit(0);
 				break;
 			default:
-				System.out.println("ÇØ´ç ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				System.out.println("í•´ë‹¹ ë²ˆí˜¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 			}
 	}
 
 	private void searchTotal() {
-		for(Book bk : book){
-			bk.print();
-		}
+		for(Book b:book) b.print();
 	}
 
-	private void searchBook() {
+	private Book getBookByName() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("ë„ì„œëª…ì„ ê²€ìƒ‰í•˜ì„¸ìš”.");
+		String searchName = sc.nextLine();
+		for(Book b : book){
+			if(searchName.equals(b.bookName))
+				return b;
+		}
+		System.out.println(searchName+"ìœ¼ë¡œ ê²€ìƒ‰í•œ ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.");
+		return null;
 		
-		
+	}
+	private void searchBook(){
+		Book book = getBookByName();
+		if(book != null){
+			System.out.println("ê²€ìƒ‰ ê²°ê³¼");
+			book.print();
+		}
 	}
 	
 	private void insertBook() {
-		System.out.println("µµ¼­ Àå¸£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ë„ì„œ ì¥ë¥´ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		Scanner sc = new Scanner(System.in);
 		String genre = sc.nextLine();
-		System.out.println("µµ¼­ ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ë„ì„œ ì´ë¦„ì„ ì…ë ¥í•˜ì„¸ìš”.");
 		String bookName = sc.nextLine();
-		System.out.println("ÀúÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+		System.out.println("ì €ìë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 		String author = sc.nextLine();
-		int bookCode = 0;
-		while (true) {
-			System.out.println("µµ¼­ ÄÚµå¸¦ ¼ıÀÚ·Î ¼¼ ÀÚ¸® ÀÔ·ÂÇÏ¼¼¿ä");
-			try {
-				bookCode = Integer.parseInt(sc.nextLine());
-				break;
-
-			} catch (NumberFormatException e) {
-				System.out.println("µµ¼­ ÄÚµå´Â ¼ıÀÚ¸¸ ÀÔ·ÂÇÏ¼¼¿ä.");
+		
+		book.add(new Book(genre, bookName, author));
+		for(Book b: book){
+			b.print();
+		}
+	}
+	private void updateBook() {
+		Scanner sc = new Scanner(System.in);
+		Book bk = getBookByName();
+		if(bk != null){
+			for(Book b: book){
+				if(b.equals(bk)){
+					b.print();
+					System.out.println("ë„ì„œ ì¥ë¥´ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+					String tempGenre = sc.nextLine();
+					System.out.println("ì±… ì´ë¦„ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+					String tempBookName = sc.nextLine();
+					System.out.println("ì €ìë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
+					String tempAuthor = sc.nextLine();
+					b.setGenre(tempGenre);
+					b.setBookName(tempBookName);
+					b.setAuthor(tempAuthor);
+					b.print();
+					break;
+				}
 			}
 		}
 	}
 	private void deleteBook() {
-		// TODO Auto-generated method stub
-		
+		Book bk = getBookByName();
+		if(bk != null){
+			for(Book b: book){
+				if(b.equals(bk)){
+					System.out.println(b.getBookName()+"ê°€(ì´) ì‚­ì œë˜ì—ˆì–´ìš”.");
+					book.remove(bk);
+					break;
+				}
+			}
+		}
 	}
-
-	private void updateBook() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

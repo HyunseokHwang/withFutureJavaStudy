@@ -3,32 +3,24 @@ package withFutureStudy;
 import java.io.Serializable;
 
 public class Book implements Serializable {
-	public int bookCode; //µµ¼­ ÄÚµå
-	public String genre; //µµ¼­ Àå¸£
-	public String bookName; //µµ¼­ ÀÌ¸§
-	public String author; //ÀúÀÚ 
+	public String genre; //ì¥ë¥´
+	public String bookName; //ì±…ì´ë¦„
+	public String author; //ì €ì
 	
 	public Book() {}
 	
-	public Book(int bookCode, String genre, String bookName, String author) {
-		this.bookCode = bookCode;
+	public Book(String genre, String bookName, String author) {
 		this.genre = genre;
 		this.bookName = bookName;
 		this.author = author;
 	}
 
 	public String get(){
-		return String.format("µµ¼­ ÄÚµå :%s","Àå¸£ :%s","µµ¼­ ÀÌ¸§ :%s","ÀúÀÚ:%s",bookCode,genre,bookName,author);
+		return String.format("ì¥ë¥´ :%s, ì±…ì´ë¦„ :%s, ì €ì :%s",genre,bookName,author);
 		
 	}
 	public void print(){
 		System.out.println(get());
-	}
-	public int getBookCode() {
-		return bookCode;
-	}
-	public void setBookCode(int bookCode) {
-		this.bookCode = bookCode;
 	}
 	public String getGenre() {
 		return genre;
