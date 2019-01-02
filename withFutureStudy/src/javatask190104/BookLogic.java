@@ -1,5 +1,7 @@
 package javatask190104;
 
+//update와 delete부분을 어떻게 처리해야 할지 모르겠습니다.
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
