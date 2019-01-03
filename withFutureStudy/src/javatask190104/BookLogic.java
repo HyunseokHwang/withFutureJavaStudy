@@ -1,6 +1,6 @@
 package javatask190104;
 
-//update와 delete부분을 어떻게 처리해야 할지 모르겠습니다.
+//update와 delete부분을 처리했는데 스트림이 이미 실행되었거나 클로즈되었다고 나옵니다.
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -97,7 +97,6 @@ public class BookLogic {
 	}
 	
 	private void insertBook() {
-		
 		System.out.println("도서 장르를 입력하세요.");
 		Scanner sc = new Scanner(System.in);
 		String genre = sc.nextLine();
@@ -105,8 +104,14 @@ public class BookLogic {
 		String bookName = sc.nextLine();
 		System.out.println("저자를 입력하세요.");
 		String author = sc.nextLine();
-		book.add(new Book(genre, bookName, author));
 		
+	
+		book.add(new Book(genre, bookName, author));
+		/*	
+		book.forEach(i -> i.setGenre(genre));
+		book.forEach(i -> i.setBookName(bookName));
+		book.forEach(i -> i.setAuthor(author));
+			*/
 		bookStream.sorted().forEach(System.out::println);
 	}
 	private void updateBook() {
