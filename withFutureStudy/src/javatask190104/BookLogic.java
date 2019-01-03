@@ -4,6 +4,7 @@ package javatask190104;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class BookLogic {
@@ -79,7 +80,7 @@ public class BookLogic {
 		String searchName = sc.nextLine();
 		//for(Book b : book){
 			//if(searchName.equals(b.bookName))
-		book.stream().filter(x -> x.equals(searchName));
+		book.stream().filter(i -> i.equals(searchName));
 		
 		System.out.println(searchName+"으로 검색한 정보가 없습니다.");
 		return null;
@@ -96,6 +97,7 @@ public class BookLogic {
 	}
 	
 	private void insertBook() {
+		
 		System.out.println("도서 장르를 입력하세요.");
 		Scanner sc = new Scanner(System.in);
 		String genre = sc.nextLine();
@@ -103,7 +105,6 @@ public class BookLogic {
 		String bookName = sc.nextLine();
 		System.out.println("저자를 입력하세요.");
 		String author = sc.nextLine();
-		
 		book.add(new Book(genre, bookName, author));
 		
 		bookStream.sorted().forEach(System.out::println);
@@ -111,9 +112,23 @@ public class BookLogic {
 	private void updateBook() {
 		Scanner sc = new Scanner(System.in);
 		Book bk = getBookByName();
-		//book.stream().filter(x -> x.equals(searchName));
-		/*if(bk != null){
-			for(Book b: book){
+		
+		if(bk != null){
+			/*bookStream(i -> {
+				return i.equals(bk);
+			});*/
+			bookStream.sorted().forEach(System.out::println);
+			/*System.out.println("도서 장르를 입력하세요.");
+			String tempGenre = sc.nextLine();
+			System.out.println("책 이름를 입력하세요.");
+			String tempBookName = sc.nextLine();
+			System.out.println("저자를 입력하세요.");
+			String tempAuthor = sc.nextLine();*/
+			book.forEach(i -> i.setGenre(i.getGenre()));
+			book.forEach(i -> i.setBookName(i.getBookName()));
+			book.forEach(i -> i.setAuthor(i.getAuthor()));
+			book.forEach(System.out::println);
+			/*for(Book b: book){
 				if(b.equals(bk)){
 					b.print();
 					System.out.println("도서 장르를 입력하세요.");
@@ -128,19 +143,23 @@ public class BookLogic {
 					b.print();
 					break;
 				}
-			}
-		}*/
+			}*/
+		}
 	}
 	private void deleteBook() {
 		Book bk = getBookByName();
 		if(bk != null){
-			for(Book b: book){
+			book.removeIf(i -> {
+				return i.equals(bk);
+			});
+			System.out.println(bk.getBookName()+"가(이) 삭제되었어요.");
+			/*for(Book b: book){
 				if(b.equals(bk)){
 					System.out.println(b.getBookName()+"가(이) 삭제되었어요.");
 					book.remove(bk);
 					break;
 				}
-			}
+			}*/
 		}
 	}
 }
